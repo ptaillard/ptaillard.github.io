@@ -1,7 +1,7 @@
 (function() {
     'use strict'
 
-    angular.module('newsFeedsApp')
+    angular.module('auth')
         .service('ServiceAuth', ServiceAuth);
 
     function ServiceAuth($injector, AuthUrl) {

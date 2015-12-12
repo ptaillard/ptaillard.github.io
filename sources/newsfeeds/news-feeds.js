@@ -1,7 +1,7 @@
 (function() {
     'use strict'
 
-    angular.module('newsFeedsApp')
+    angular.module('newsFeeds')
         .service('NewsFeeds', NewsFeeds);
 
     function NewsFeeds() {

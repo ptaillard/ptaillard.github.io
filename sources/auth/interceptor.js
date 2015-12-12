@@ -1,5 +1,5 @@
 (function() {
-    angular.module('newsFeedsApp')
+    angular.module('auth')
         .factory('BearerAppenderInterceptor', function($q, $log, ServiceAuth, TokenService, ConfigHeaderUpdater, AuthUrl) {
 
             var bearerAppenderInterceptor = {

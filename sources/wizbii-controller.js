@@ -2,7 +2,7 @@
 (function() {
     'use strict'
 
-    angular.module('newsFeedsApp')
+    angular.module('wizbiiApp')
         .controller('WizbiiController', WizbiiController);
 
     function WizbiiController(NewsFeeds) {
