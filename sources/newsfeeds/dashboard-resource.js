@@ -7,8 +7,7 @@
     function DashboardResource($log, TokenService, $q, $http) {
 
         var deferred = $q.defer();
-        var token = 'Bearer ' + TokenService.getToken();
-        $log.debug('Token to add for authorization: ' + token);
+        //var token = 'Bearer ' + TokenService.getToken();
 
         $http({
             method: 'GET',

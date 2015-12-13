@@ -11,7 +11,6 @@
         this.setToken = setToken;
 
         function hasToken() {
-            $log.debug('token ' + token);
             return token !== null;
         };
 
