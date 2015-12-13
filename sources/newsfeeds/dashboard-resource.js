@@ -11,8 +11,8 @@
         $log.debug('Token to add for authorization: ' + token);
 
         $http({
-	            method: 'GET',
-	            url: 'dashboard.json'
+            method: 'GET',
+            url: 'dashboard.json'
         }).success(function (data, status, headers, config) {
             deferred.resolve(data);
         }).error(function (data, status, headers, config) {

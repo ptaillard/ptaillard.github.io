@@ -24,25 +24,26 @@
                 password:'decouvertewizbii',
                 client_id:'test',
                 grant_type:'password'
-	        };
+            };
 
             var deferred = $q.defer();
             $http({
-	            method: 'POST',
-	            url: AuthUrl.url(),
-	            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-	            transformRequest: function(obj) {
-	                var str = [];
-	                for(var p in obj)
-	                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-	                return str.join("&");
-	            },
-	            data: dataConnexion
-	        }).success(function (data, status, headers, config) {
+                method: 'POST',
+                url: AuthUrl.url(),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for (var p in obj) {
+                        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+                    }
+                    return str.join('&');
+                },
+                data: dataConnexion
+            }).success(function (data, status, headers, config) {
                 deferred.resolve(data);
-	        }).error(function (data, status, headers, config) {
-	           deferred.reject(data);
-	        });
+            }).error(function (data, status, headers, config) {
+                deferred.reject(data);
+            });
             return deferred.promise;
         };
     };
