@@ -2,13 +2,13 @@
 (function() {
     'use strict';
 
-    angular.module('vendors', ['ngResource', 'ngAria', 'ngAnimate', 'ngMaterial']);
-    angular.module('newsFeedsApp', ['vendors']);
+    angular.module('auth', ['ngResource']);
+    angular.module('newsFeeds', ['ngResource', 'ngAria', 'ngAnimate', 'ngMaterial']);
+    angular.module('wizbiiApp', ['newsFeeds', 'auth']);
 
-    angular.module('newsFeedsApp')
-        .config(function($mdThemingProvider) {
-            $mdThemingProvider.theme('default')
-                .primaryPalette('light-blue')
-                .accentPalette('teal');
+    angular.module('wizbiiApp')
+        .config(function($httpProvider) {
+            //$httpProvider.interceptors.push('BearerAppenderInterceptor');
         });
+
 })();
