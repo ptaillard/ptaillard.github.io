@@ -7,9 +7,8 @@
     angular.module('wizbiiApp', ['newsFeeds', 'auth']);
 
     angular.module('wizbiiApp')
-        .config(function($mdThemingProvider) {
-            $mdThemingProvider.theme('default')
-                .primaryPalette('light-blue')
-                .accentPalette('teal');
+        .config(function($httpProvider) {
+            //$httpProvider.interceptors.push('BearerAppenderInterceptor');
         });
+
 })();
