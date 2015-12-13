@@ -10,7 +10,6 @@
         vm.appendBearerTokenTo = appendBearerTokenTo;
 
         function appendBearerTokenTo(config) {
-            $log.debug('Append Bearer token to config ' + TokenService.getToken());
             config.headers = config.headers || {};
             config.headers.Authorization = 'Bearer ' + TokenService.getToken();
             return config;

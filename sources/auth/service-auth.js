@@ -4,7 +4,7 @@
     angular.module('auth')
         .service('ServiceAuth', ServiceAuth);
 
-    function ServiceAuth($injector, AuthUrl) {
+    function ServiceAuth($injector, AuthUrl, $q) {
         this.token = '';
         this.authentification = authentification;
 
@@ -17,22 +17,33 @@
         };
 
         function authentification() {
-            var $resource = $injector.get('$resource');
-            return $resource(AuthUrl.url(), {}, {
-                    post: {
-                        method: 'POST',
-                        params:{
-                            username:'decouverte%40wizbii.com',
-                            password:'decouvertewizbii',
-                            client_id:'test',
-                            grant_type:'password'
-                        },
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }
-                })
-                .post().$promise;
+            var $http = $injector.get('$http');
+
+            var dataConnexion = {
+                username:'decouverte@wizbii.com',
+                password:'decouvertewizbii',
+                client_id:'test',
+                grant_type:'password'
+	        };
+
+            var deferred = $q.defer();
+            $http({
+	            method: 'POST',
+	            url: AuthUrl.url(),
+	            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	            transformRequest: function(obj) {
+	                var str = [];
+	                for(var p in obj)
+	                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+	                return str.join("&");
+	            },
+	            data: dataConnexion
+	        }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+	        }).error(function (data, status, headers, config) {
+	           deferred.reject(data);
+	        });
+            return deferred.promise;
         };
     };
 

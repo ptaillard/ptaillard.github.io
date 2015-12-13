@@ -1,6 +1,8 @@
 (function() {
+    'use strict'
+
     angular.module('auth')
-        .service('AuthUrl', function($q, $log, ServiceAuth, TokenService, ConfigHeaderUpdater) {
+        .service('AuthUrl', function() {
             var authUrl = 'https://api.wizbii.com/v1/account/validate'
 
             this.url = url;
