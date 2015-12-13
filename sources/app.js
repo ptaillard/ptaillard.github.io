@@ -8,7 +8,7 @@
 
     angular.module('wizbiiApp')
         .config(function($httpProvider) {
-            //$httpProvider.interceptors.push('BearerAppenderInterceptor');
+            $httpProvider.interceptors.push('BearerAppenderInterceptor');
         });
 
 })();
