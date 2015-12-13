@@ -12,22 +12,55 @@
         <title>News Feeds Wizbii</title>
     </head>
 
-    <body ng-controller="WizbiiController as wizbii">
-        <md-toolbar>
+    <body ng-controller="WizbiiController as wizbii" ng-cloak>
+        <md-toolbar style="position: fixed;">
             <div class="md-toolbar-tools">
                 <h2>
                     <span>News Feeds Wizbii</span>
                 </h2>
-                <span flex></span>
+                <span flex=5></span>
+                <span flex><small>{{wizbii.publicationsNumber()}} publications</small></span>
             </div>
         </md-toolbar>
 
-        <md-content>
-            <md-list>
-                <md-subheader class="md-no-sticky">3 line item</md-subheader>
-                <md-list-item class="md-3-line" ng-repeat="item in wizbii.newsFeeds.news">
+        <md-content style="padding-top: 80px;">
+            <md-list class="md-padding">
+                <md-input-container flex>
+                    <label>Sélection du type de publication</label>
+                    <md-select ng-model="wizbii.currentType">
+                        <md-option ng-repeat="type in wizbii.types()" value="{{type}}">
+                            {{type}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-list-item class="md-3-line" ng-repeat="item in wizbii.newsFeeds | typeFilter:wizbii.currentType" ng-if="item.type == 'publication'">
                     <div class="md-list-item-text" layout="column">
-                        <h3>{{ item }}</h3>
+                        <md-card class="md-padding card-news">
+                            <md-card-content ng-if="item.publication.type !=='FACEBOOK'">
+                                Catégorie: <i>{{item.publication.type}}</i>
+                                <div layout="row" class="md-padding header-news">
+                                    <img ng-if="item.publication.profile.avatar != undefined" ng-src="{{item.publication.profile.avatar}}" style="width:100px; height:100px;" class="md-avatar" alt="{{item.who}}" >
+                                    <span flex="5"></span>
+                                    <h1 flex="50" class="md-title">{{item.publication.profile.name}}</h1>
+                                </div>
+                                <h2 class="md-title">{{item.publication.profile.title}}</h2>
+                                <p style="color:black;">{{ item.publication.content }}</p>
+                                <p>{{ item.publication.comments.length }} commentaire(s)</p>
+                                <md-content class="md-padding card-news" layout="row">
+                                    <md-chips ng-repeat="tag in item.publication.tags">
+                                        <md-chip>{{tag.name}}</md-chip>
+                                    </md-chips>
+                                </md-content>
+                            </md-card-content>
+                            <md-card-content ng-if="item.publication.type ==='FACEBOOK'">
+                                <div layout="row" class="md-padding">
+                                    <img ng-src="{{item.publication.attachment_picture}}" style="width:{{item.publication.attachment_picture_width}}px; height:{{item.publication.attachment_picture_height}}px;" class="md-avatar" alt="{{item.who}}" >
+                                    <span flex="5"></span>
+                                </div>
+                                <h2 class="md-title">{{item.publication.attachment_content}}</h2>
+                                <p style="color:black;">{{ item.publication.attachment_title }}</p>
+                            </md-card-content>
+                        </md-card>
                     </div>
                 </md-list-item>
             </md-list>
@@ -48,6 +81,7 @@
         <script src="sources/auth/service-auth.js"></script>
         <script src="sources/auth/token-service.js"></script>
         <script src="sources/newsfeeds/news-feeds.js"></script>
+        <script src="sources/newsfeeds/dashboard-resource.js"></script>
         <script src="sources/wizbii-controller.js"></script>
         <!-- endinjector -->
     </body>
