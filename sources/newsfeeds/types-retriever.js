@@ -12,7 +12,7 @@
         function retrieve(newsFeeds) {
             var types = ['ALL'];
 
-            if (!_.isUndefined(newsFeeds)) {
+            if (!_.isUndefined(newsFeeds) && !_.isEmpty(newsFeeds)) {
                 var typesDePublication = _.filter(newsFeeds, function(item) {
                     return item.type == NewsFeedsConstant.publication;
                 });
