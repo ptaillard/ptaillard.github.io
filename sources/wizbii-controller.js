@@ -6,7 +6,7 @@
         .controller('WizbiiController', WizbiiController)
         .filter('typeFilter', typeFilter);
 
-    function WizbiiController(NewsFeeds, TypesRetriever, NewsFeedsConstant) {
+    function WizbiiController(NewsFeeds, TypesRetriever, CountPublications, NewsFeedsConstant) {
         var vm = this;
         vm.publicationsNumber = publicationsNumber;
         vm.currentType = NewsFeedsConstant.allTypes;
@@ -14,15 +14,7 @@
         vm.newsFeeds = NewsFeeds.datas;
 
         function publicationsNumber() {
-            if (!_.isUndefined(vm.newsFeeds)) {
-                return _.reduce(vm.newsFeeds, function(memo, item) {
-                        if (item.type === NewsFeedsConstant.publication) {
-                            return memo + 1;
-                        }
-                        return memo;
-                    }, 0);
-            }
-            return 0;
+            return CountPublications.count(vm.newsFeeds);
         };
 
         function types() {
