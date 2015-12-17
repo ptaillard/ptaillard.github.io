@@ -6,7 +6,7 @@
 
             var bearerAppenderInterceptor = {
                 request: function(config) {
-                    if (AuthUrl.isUrlAuth(config.url)) {
+                    if (!AuthUrl.isUrlAuth(config.url)) {
                         var deferred = $q.defer();
                         if (TokenService.hasToken()) {
                             deferred.resolve(ConfigHeaderUpdater.appendBearerTokenTo(config));
