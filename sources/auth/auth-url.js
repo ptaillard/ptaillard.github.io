@@ -13,7 +13,7 @@
             };
 
             function isUrlAuth(checkedUrl) {
-                return checkedUrl !== authUrl;
+                return checkedUrl === authUrl;
             };
         });
 })();
