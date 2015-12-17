@@ -5,16 +5,7 @@
         .service('ServiceAuth', ServiceAuth);
 
     function ServiceAuth($injector, AuthUrl, $q) {
-        this.token = '';
         this.authentification = authentification;
-
-        function hasToken() {
-            return this.token != '';
-        };
-
-        function token() {
-            return this.token;
-        };
 
         function authentification() {
             var $http = $injector.get('$http');
